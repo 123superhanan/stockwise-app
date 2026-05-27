@@ -1,5 +1,5 @@
 
-```markdown
+
 # StockWise - AI-Powered Inventory Management
 
 **Smart receipt scanning + demand forecasting for small businesses**
