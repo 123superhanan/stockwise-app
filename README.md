@@ -1,5 +1,3 @@
-
-```markdown
 # StockWise - AI-Powered Inventory Management
 
 **Smart receipt scanning + demand forecasting for small businesses**
@@ -15,7 +13,7 @@ Small business owners waste hours manually entering receipts into spreadsheets. 
 ## Features
 
 | Feature | Description |
-|---------|-------------|
+| :--- | :--- |
 | Receipt Scanner | Take photo → AI extracts items, prices, date, total |
 | Inventory Tracking | Auto-updates stock levels from receipts |
 | Demand Forecast | Predicts next week's sales using LSTM/Prophet |
@@ -25,7 +23,7 @@ Small business owners waste hours manually entering receipts into spreadsheets. 
 ## Tech Stack
 
 | Layer | Technology |
-|-------|------------|
+| :--- | :--- |
 | Frontend | React Native (Expo) |
 | Backend | Node.js + Express |
 | AI Service | FastAPI (Python) |
@@ -35,163 +33,3 @@ Small business owners waste hours manually entering receipts into spreadsheets. 
 | Deployment | Render + Hugging Face |
 
 ## Architecture
-
-```
-Receipt Photo → YOLOv8 (detect) → PaddleOCR (read text) → LayoutLM (extract) → Database → LSTM (forecast) → Alert
-```
-
-## Project Structure
-
-```
-stockwise/
-├── frontend/           # React Native mobile app
-├── backend/            # Node.js API server
-│   ├── controllers/    # Route handlers
-│   ├── models/         # Database models
-│   ├── routes/         # API endpoints
-│   └── middleware/     # Auth, upload
-├── ai-service/         # Python FastAPI + ML models
-│   ├── models/         # Trained YOLO/LayoutLM
-│   └── services/       # OCR, prediction
-└── docs/               # Documentation
-```
-
-## API Endpoints
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | /api/receipts/upload | Upload receipt image |
-| GET | /api/receipts | List all receipts |
-| GET | /api/products | Get inventory |
-| POST | /api/products | Add product |
-| GET | /api/predictions/:id | Get demand forecast |
-
-## Database Schema
-
-- **businesses** - Company details, subscription tier
-- **products** - Name, stock level, threshold, price
-- **receipts** - Image URL, merchant, total, date
-- **receipt_items** - Product name, quantity, price
-- **sales** - Quantity sold, date, revenue
-- **predictions** - Forecasted quantity, confidence interval
-
-## ML Models Trained
-
-| Model | Task | Dataset | Accuracy |
-|-------|------|---------|----------|
-| YOLOv8 | Receipt detection | 500 annotated images | 94% |
-| LayoutLM | Info extraction | SROIE (1000 receipts) | 89% F1 |
-| LSTM | Demand forecast | Proprietary sales data | MAE: 5.2 units |
-
-## Quick Start
-
-### Prerequisites
-- Node.js 18+
-- Python 3.10+
-- Supabase account (free)
-
-### Installation
-
-```bash
-# Clone repository
-git clone https://github.com/yourusername/stockwise.git
-cd stockwise
-
-# Backend setup
-cd backend
-npm install
-npm run dev
-
-# AI service setup (new terminal)
-cd ai-service
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
-pip install -r requirements.txt
-python main.py
-
-# Frontend setup (new terminal)
-cd frontend
-npm install
-npx expo start
-```
-
-### Environment Variables
-
-Create `.env` files:
-
-**backend/.env**
-```
-PORT=5000
-SUPABASE_URL=your_url
-SUPABASE_ANON_KEY=your_key
-JWT_SECRET=your_secret
-```
-
-**ai-service/.env**
-```
-SUPABASE_URL=your_url
-SUPABASE_KEY=your_key
-MODEL_PATH=./models
-```
-
-## Training Your Own Models
-
-### YOLOv8 Receipt Detector
-```bash
-cd ai-service
-python train_yolo.py --data dataset.yaml --epochs 100 --img 640
-```
-
-### LayoutLM Extractor
-```bash
-python train_layoutlm.py --dataset sroie --epochs 20 --batch_size 8
-```
-
-### LSTM Forecaster
-```bash
-python train_lstm.py --window 30 --epochs 50
-```
-
-## Deployment
-
-| Service | Platform | Cost |
-|---------|----------|------|
-| Backend | Render | Free |
-| AI Service | Hugging Face Spaces | Free |
-| Database | Supabase | Free (500MB) |
-| Storage | Supabase | Free (1GB) |
-
-## Future Improvements
-
-- [ ] Multi-language receipt support
-- [ ] WhatsApp integration for alerts
-- [ ] Accounting software export (QuickBooks)
-- [ ] Barcode scanning
-- [ ] Team accounts
-
-## Contributors
-
-- Your Name - Abdul Hanan
-
-## License
-
-MIT
-
-## Contact
-
-Email: abdulhananabbasi50@gmail.com
-
----
-
-**Built with:** React Native, Node.js, FastAPI, PyTorch, Supabase
-```
-
----
-
-Save this file as `README.md` in your root `stockwise/` folder:
-
-```powershell
-# In PowerShell, from stockwise root directory:
-New-Item -ItemType File -Path "README.md" -Force
-# Then open and paste the content above
-```
