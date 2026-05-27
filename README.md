@@ -1,6 +1,3 @@
-Here is everything completely merged into one single, clean, production-ready `README.md` file. It includes the fixed GitHub table alignments, the correct spacing, your project structure, your tech stack, and your contact information.
-
-Copy and paste the entire block below directly into your file:
 
 ```markdown
 # StockWise - AI-Powered Inventory Management
